@@ -2,4 +2,5 @@
 
 collection of various scripts
 
-* [check-banks.sh](../blob/master/check-banks.sh)
+* [check-banks.sh](../master/check-banks.sh)
+...Checks the home banking portals of various banks for DANE/TLSA

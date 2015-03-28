@@ -27,7 +27,11 @@ banks=('kunde.comdirect.de' 		\
 		'banking.netbank.de'		\
 		'kunden.commerzbank.de'		\
 		'meine.deutsche-bank.de'	\
-		'www.targobank.de');
+		'www.targobank.de'          \
+        'portal.sparkasse-amberg-sulzbach.de'       \
+        'banking.berliner-sparkasse.de'             \
+        'banking.bw-bank.de'        \
+        'banking.postbank.de');
 
 LDNS_DANE=$(which ldns-dane 2> /dev/null)
 

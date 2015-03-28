@@ -46,8 +46,8 @@ for bank in ${banks[@]}; do
 	res=$($LDNS_DANE verify $bank 443 2> /dev/null)
 	status=$?
 	if [ $status -eq 0 ]; then
-		echo $bank "uses DANE/TLSA"
+		echo -e $bank "\e[32mvalid\e[0m DANE/TLSA found"
 	else
-		echo $bank "no valid DANE/TLSA found"
+		echo -e $bank "\e[31mno valid\e[0m DANE/TLSA found"
 	fi
 done

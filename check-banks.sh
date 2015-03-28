@@ -253,6 +253,10 @@ banks=('kunde.comdirect.de' 		\
         'banking.postbank.de');
 
 LDNS_DANE=$(which ldns-dane 2> /dev/null)
+HOST=$(which host 2> /dev/null)
+
+TESTED=0
+VALID=0
 
 if [ ! $LDNS_DANE ];
 then
@@ -261,12 +265,30 @@ then
 	exit -1
 fi
 
+if [ ! $HOST ];
+then
+    echo "No DNS lookup utility found"
+    exit -1
+fi
+
 for bank in ${banks[@]}; do
+    status=-1
+    res=$($HOST $bank 2> /dev/null)
+    status=$?
+    if [ $status -ne 0 ];
+    then
+        continue;
+    fi
+    status=-1
+    TESTED=$((TESTED + 1))
 	res=$($LDNS_DANE verify $bank 443 2> /dev/null)
 	status=$?
-	if [ $status -eq 0 ]; then
+	if [ $status -eq 0 ];
+    then
 		echo -e $bank "\e[32mvalid\e[0m DANE/TLSA found"
+        VALID=$((VALID + 1))
 	else
 		echo -e $bank "\e[31mno valid\e[0m DANE/TLSA found"
 	fi
 done
+echo $VALID "out of" $TESTED "tested banking portals use DANE/TLSA"

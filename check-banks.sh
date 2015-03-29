@@ -249,6 +249,55 @@ banks=('kunde.comdirect.de' 		\
         'portal.spk-kg.de'                          \
         'portal.sparkasse-ansbach.de'               \
         'portal.sparkasse-dinkelsbuehl.de'          \
+        'www.apobank.de'                            \
+        'banking.sparda.de'                         \
+        'onlinebanking.berliner-volksbank.de'       \
+        'netbanking.sozialbank.de'                  \
+        'finanzportal.fiducia.de'                   \
+        'www.dovoba.de'                             \
+        'www.kd-bank.de'                            \
+        'www.hannoversche-volksbank.de'             \
+        'www.bibessen.de'                           \
+        'www.dkm.de'                                \
+        'www.volksbank-phd.de'                      \
+        'www.bkc-paderborn.de'                      \
+        'banking.bank1saar.de'                      \
+        'onlinebanking.psd-bank.de'                 \
+        'www.gls-online-filiale.de'                 \
+        'www.pax-bank.de'                           \
+        'www.koelnerbank.de'                        \
+        'www.grafschafter-volksbank.de'             \
+        'www.edekabank.de'                          \
+        'www.ostfriesische-volksbank.de'            \
+        'www.maerkische-bank.de'                    \
+        'www.genobank.de'                           \
+        'www.voba-mg.de'                            \
+        'www.volksbank-stade-cuxhaven.de'           \
+        'www.aachener-bank.de'                      \
+        'www.gladbacher-bank.de'                    \
+        'www.pommerschevb.de'                       \
+        'www.credvoba.de'                           \
+        'www.bensbergerbank.de'                     \
+        'www.spreewaldbank.de'                      \
+        'www.nobaeg.de'                             \
+        'www.harzer-volksbank.de'                   \
+        'www.sylter-bank.de'                        \
+        'www.mendener-bank.de'                      \
+        'www.hs-banking.de'                         \
+        'www.vrbfw.de'                              \
+        'www.vbloeningen.de'                        \
+        'www.huemmlinger-volksbank.de'              \
+        'www.vb-gescher.de'                         \
+        'www.vbemstek.de'                           \
+        'www.vierlaender-volksbank.de'              \
+        'www.kaltenkirchener-bank.de'               \
+        'www.bruehlerbank.de'                       \
+        'www.vb-nordhuemmling.de'                   \
+        'www.foehr-amrumer-bank.de'                 \
+        'www.skbwitten.de'                          \
+        'www.mkbag.de'                              \
+        'www.spadaka-hoengen.de'                    \
+        'www.teba-kreditbank.net'                   \
         'banking.bw-bank.de'       \
         'banking.postbank.de');
 

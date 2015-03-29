@@ -257,6 +257,32 @@ HOST=$(which host 2> /dev/null)
 
 TESTED=0
 VALID=0
+HTML=0
+
+output(){
+    if [ $HTML -eq 1 ];
+    then
+        echo "<tr>"
+        TITLE=$(echo $2 | cut -d "." -f 2,3)
+        echo "<td><a href=\"https://"$2"\">"$TITLE"</a></td>"
+        if [ $1 -eq 0 ];
+        then
+            echo "<td>JA</td>"
+            VALID=$((VALID + 1))
+        else
+            echo "<td>NEIN</td>"
+        fi
+        echo "</tr>"
+    else
+        if [ $1 -eq 0 ];
+        then
+            echo -e $2 "\e[32mvalid\e[0m DANE/TLSA found"
+            VALID=$((VALID + 1))
+        else
+            echo -e $2 "\e[31mno valid\e[0m DANE/TLSA found"
+        fi
+    fi
+}
 
 if [ ! $LDNS_DANE ];
 then
@@ -271,7 +297,38 @@ then
     exit -1
 fi
 
-for bank in ${banks[@]}; do
+while [[ "$1" == -* ]];
+do
+    case $1 in
+        -h)
+            HTML=1
+            ;;
+        *)
+            echo $1 "unrecognized pattern"
+            exit -1
+            ;;
+    esac
+    shift
+done
+
+if [ $HTML -eq 1 ];
+then
+    echo "<!DOCTYPE html>"
+    echo "<html lang="de">"
+    echo "<head>"
+    echo "<title>Nutzt deine Bank DANE/TLSA?</title>"
+    echo "</head>"
+    echo "<body>"
+    echo "<table>"
+    echo "Letzte Aktualisierung: " $(date +"%d.%m.%Y %H:%M Uhr")
+    echo "<tr>"
+    echo "<td>Bank</td>"
+    echo "<td>DANE/TLSA</td>"
+    echo "</tr>"
+fi
+
+for bank in ${banks[@]};
+do
     status=-1
     res=$($HOST $bank 2> /dev/null)
     status=$?
@@ -283,12 +340,16 @@ for bank in ${banks[@]}; do
     TESTED=$((TESTED + 1))
 	res=$($LDNS_DANE verify $bank 443 2> /dev/null)
 	status=$?
-	if [ $status -eq 0 ];
-    then
-		echo -e $bank "\e[32mvalid\e[0m DANE/TLSA found"
-        VALID=$((VALID + 1))
-	else
-		echo -e $bank "\e[31mno valid\e[0m DANE/TLSA found"
-	fi
+    output $status $bank
 done
-echo $VALID "out of" $TESTED "tested banking portals use DANE/TLSA"
+
+if [ $HTML -eq 1 ];
+then
+    echo "</table>"
+    echo "Deine Bank ist nicht gelistet?"
+    echo "<a href=\"https://github.com/florianl/playground/issues/new\">Dann lass deine Bank in diese Liste mit aufnehmen</a>"
+    echo "</body>"
+    echo "</html>"
+else
+    echo $VALID "out of" $TESTED "tested banking portals use DANE/TLSA"
+fi

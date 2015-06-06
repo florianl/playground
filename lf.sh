@@ -18,7 +18,7 @@
 ##
 
 functions(){
-    awk '/^[[:alpha:]]/{f=FILENAME"[\033[1;32m"FNR"\033[0m]\t\033[0;32m"$0"\033[0m\n"} {printf "%s",f;f="" }' $1
+    awk '/^[[:alpha:]].*[^;:]$/{f=FILENAME"[\033[1;32m"FNR"\033[0m]\t\033[0;32m"$0"\033[0m\n"} {printf "%s",f;f="" }' $1
 }
 
 if [ $# == 0 ];

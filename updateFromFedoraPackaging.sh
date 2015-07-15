@@ -2,11 +2,30 @@
 
 FEDPKG=$(which fedpkg 2> /dev/null)
 
+terminators=("Locals" "Remotes" "origin" "patch" "rpm" "spec" "sources")
+
+function checkTerminators {
+    for j in "${terminators[@]}";
+    do
+        if [[ $1 == *$j* ]];
+        then
+            # This is not a branch or you don't want to fetch it
+            return 1
+        fi
+    done
+    return 0
+}
+
 function update {
 
-    for i in $($FEDPKG switch-branch -l | grep -v Locals | grep -v Remotes | grep -v origin);
+    for i in $($FEDPKG switch-branch -l);
     do
-        $FEDPKG switch-branch $i || continue
+        checkTerminators $i
+        if [ $? == 1 ];
+        then
+            continue
+        fi
+        $FEDPKG switch-branch $i 2> /dev/null || continue
         $FEDPKG pull
     done
 }

@@ -381,6 +381,7 @@ fi
 
 for bank in ${banks[@]};
 do
+    sleep 2
     status=-1
     res=$($HOST $bank 2> /dev/null)
     status=$?

@@ -299,6 +299,9 @@ banks=('kunde.comdirect.de' 		\
         'www.spadaka-hoengen.de'                    \
         'www.teba-kreditbank.net'                   \
         'banking.bw-bank.de'       \
+        'my.number26.de'                            \
+        'banking.fidor.de'                          \
+        'consorsbank.de'                            \
         'banking.postbank.de');
 
 LDNS_DANE=$(which ldns-dane 2> /dev/null)

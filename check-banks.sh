@@ -302,6 +302,12 @@ banks=('kunde.comdirect.de' 		\
         'my.number26.de'                            \
         'banking.fidor.de'                          \
         'consorsbank.de'                            \
+        'ebanking-de2.ubs.com'                      \
+        'www2.security.us.hsbc.com'                 \
+        'international.lloydsbank.com'              \
+        'www.vtb-direktbank.de'                     \
+        'online.bm.ru'                              \
+        'ibank.rosbank.ru'                          \
         'banking.postbank.de');
 
 LDNS_DANE=$(which ldns-dane 2> /dev/null)

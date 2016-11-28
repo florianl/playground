@@ -13,3 +13,5 @@ collection of various scripts
 * [dynv6.sh](../master/dynv6.sh) - A simple script I use in a cronjob to update the information on [dynv6](https://dynv6.com/)
 
 * [getPanonos.py](../master/getPanonos.py) -A simple script I use to get a list of all captures from a [Panono Camera](https://www.panono.com)
+
+* [mirror.sh](../master/mirror.sh) - A simple script to run my Magic Mirror. It opens firefox in fullscreen mode without add-on.

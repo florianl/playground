@@ -23,28 +23,30 @@ if [ -z "$hostname" -o -z "$token" ]; then
   exit 1
 fi
 
+if [ -z "$netmask" ]; then
+    netmask=128
+fi
+
 if [ -n $BIN_RDISC6 ]; then
     if [ ! $device ]; then
         # setting $device to a default value
         # rdisc6 needs a device
         device="eth0"
     fi
-    current=$($BIN_RDISC6 -1 -r1 -q $device)
+    address=$($BIN_RDISC6 -1 -r1 -q $device)
 else
-    if [ -z "$netmask" ]; then
-        netmask=128
-    fi
     if [ -n "$device" ]; then
         device="dev $device"
     fi
     address=$(ip -6 addr list scope global $device | grep -v " fd" | sed -n 's/.*inet6 \([0-9a-f:]\+\).*/\1/p' | head -n 1)
-    if [ -z "$address" ]; then
-        echo "no IPv6 address found"
-        exit 1
-    fi
-    # address with netmask
-    current=$address/$netmask
 fi
+
+if [ -z "$address" ]; then
+    echo "no IPv6 address found"
+    exit 1
+fi
+# address with netmask
+current=$address/$netmask
 
 if [ ${#BIN_CURL} -ge 1 ]; then
   bin="$BIN_CURL -fsS"

@@ -15,3 +15,5 @@ collection of various scripts
 * [getPanonos.py](../master/getPanonos.py) -A simple script I use to get a list of all captures from a [Panono Camera](https://www.panono.com)
 
 * [mirror.sh](../master/mirror.sh) - A simple script to run my Magic Mirror. It opens firefox in fullscreen mode without add-on.
+
+* [bugzilla-33c3.svg](../master/bugzilla-33c3.svg) - A sticker, based on the design principles from [33c3](https://events.ccc.de/congress/2016/wiki/Static:Design), made for the 33th congress of the [CCC](https://ccc.de/).

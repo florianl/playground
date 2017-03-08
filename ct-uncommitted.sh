@@ -1,12 +1,14 @@
 #!/bin/sh
 
 function printUsage {
-    echo $1 "-d /vobs/to/project [-u user] [-h]"
+    echo $1 "-d /vobs/to/project [-u user] [-h] [-s]"
     echo ""
     echo "-d /vobs/to/project"
     echo "Specifies the path where to find uncommitted changes."
     echo "-u user"
     echo "Limit the output to a specified user."
+    echo "-s"
+    echo "If set, only a list of uncommitted files and the corresponding user is printed."
     echo "-h"
     echo "Print this help"
     echo ""
@@ -26,7 +28,7 @@ then
     exit -1
 fi
 
-while getopts "hd:u:" arg;
+while getopts "hsd:u:" arg;
 do
     case $arg in
         d)
@@ -38,6 +40,9 @@ do
         h)
             printUsage $0
             exit 0
+            ;;
+        s)
+            SHORTOUTPUT=true
             ;;
         *)
             echo "Unknown option"
@@ -63,7 +68,11 @@ do
     ctFile=$(echo $change | cut -d ";" -f 1)
     ctUser=$(echo $change | cut -d ";" -f 2)
     ctView=$(echo $change | cut -d ";" -f 3)
-    echo $(echo $ctFile | cut -d "@" -f 1) "by" $ctUser
-    $CT setview -exec "$CT diff -predecessor -columns 162 $(echo $ctFile | cut -d "@" -f 1) " $ctView
-    echo ""
+    if $SHORTOUTPUT ;
+    then
+        echo $(echo $ctFile | cut -d "@" -f 1) "by" $ctUser
+    else
+        $CT setview -exec "$CT diff -predecessor -columns 162 $(echo $ctFile | cut -d "@" -f 1) " $ctView
+        echo ""
+    fi
 done

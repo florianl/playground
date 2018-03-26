@@ -15,5 +15,9 @@ Usage
           [...]
         $ go build
           [...]
-        $ ./dnstree
+        $ ./dnstree mydata.csv
           [...]
+
+Lessons learned
+---------------
+[golang](https://golang.org/)s implementation of [map](https://golang.org/ref/spec#Map_types) is really fast.

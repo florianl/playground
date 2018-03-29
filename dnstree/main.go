@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/csv"
 	"fmt"
 	"io"
@@ -76,4 +77,26 @@ func main() {
 		elapsed = time.Since(start)
 		fmt.Println(test, "is on", rank, "and was found in", elapsed)
 	}
+	fmt.Println("")
+
+	scanner := bufio.NewScanner(os.Stdin)
+	var dyn string
+	for {
+		fmt.Print("\nEnter your a domain: ")
+		scanner.Scan()
+		dyn = scanner.Text()
+		if dyn != "exit" {
+			start = time.Now()
+			rank, _ := compare[dyn]
+			elapsed = time.Since(start)
+			fmt.Println(dyn, "is on", rank, "and was found in the map in", elapsed)
+			start = time.Now()
+			rank, _ = dnstree.Search(dyn)
+			elapsed = time.Since(start)
+			fmt.Println(dyn, "is on", rank, "and was found in the tree in", elapsed)
+		} else {
+			break
+		}
+	}
+
 }
